@@ -1,0 +1,23 @@
+
+version: "2.4"
+services:
+  simpleapi:
+    image: simpleapi
+    ports:
+      - "5000:5000"
+    volumes:
+      - type: bind
+        source: ./simple_api/student_age.json
+        target: /docker-entrypoint-initdb.d/data/student_age.json
+
+  apache:
+    image: php:apache
+    ports:
+      - "80:80"
+    environment:
+      USERNAME: toto
+      PASSWORD: python
+    volumes:
+      - type: bind
+        source: ./website
+        target: /var/www/html
